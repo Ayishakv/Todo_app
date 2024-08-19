@@ -3,7 +3,9 @@ import 'package:todo_app/utils/color_constants.dart';
 import 'package:todo_app/view/task_screen/task_screen.dart';
 
 class TaskCard extends StatefulWidget {
-  const TaskCard({super.key});
+  const TaskCard({super.key, required this.tasktitle, required this.date, y});
+  final String tasktitle;
+  final String date;
 
   @override
   State<TaskCard> createState() => _TaskCardState();
@@ -11,6 +13,7 @@ class TaskCard extends StatefulWidget {
 
 class _TaskCardState extends State<TaskCard> {
   bool onchecked = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

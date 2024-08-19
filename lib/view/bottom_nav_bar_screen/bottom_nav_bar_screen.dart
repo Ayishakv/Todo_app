@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/utils/color_constants.dart';
 import 'package:todo_app/view/add_button_screen/add_button_screen.dart';
 import 'package:todo_app/view/calendar_screen/calendar_screen.dart';
@@ -16,6 +18,7 @@ class BottomNavBarScreen extends StatefulWidget {
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   TextEditingController taskcontroller = TextEditingController();
   TextEditingController descontroller = TextEditingController();
+  TextEditingController datecontroller = TextEditingController();
 
   int selectedindex = 0;
   List<Widget> myScreens = [
@@ -25,6 +28,15 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     FocusScreen(),
     ProfileScreen()
   ];
+  // var taskbox = Hive.box("taskbox");
+  // List taskKeys = [];
+  // @override
+  // void initState() {
+  //   taskKeys = taskbox.keys.toList();
+  //   setState(() {});
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +78,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                   selectedindex = value;
                   if (value == 2) {
                     add_button_section(
+                        datecontroller: datecontroller,
                         taskcontroller: taskcontroller,
                         descontroller: descontroller);
                   } else {
@@ -79,7 +92,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
           Positioned(
             left: 175,
             child: add_button_section(
-                taskcontroller: taskcontroller, descontroller: descontroller),
+                datecontroller: datecontroller,
+                taskcontroller: taskcontroller,
+                descontroller: descontroller),
           ),
         ],
       ),
@@ -92,13 +107,16 @@ class add_button_section extends StatelessWidget {
     super.key,
     required this.taskcontroller,
     required this.descontroller,
+    required this.datecontroller,
   });
 
   final TextEditingController taskcontroller;
   final TextEditingController descontroller;
+  final TextEditingController datecontroller;
 
   @override
   Widget build(BuildContext context) {
+    // bool isEdit = false;
     return InkWell(
       onTap: () {
         showDialog(
@@ -150,16 +168,21 @@ class add_button_section extends StatelessWidget {
             actions: [
               //date and time button
               IconButton(
-                  onPressed: () {
-                    showDatePicker(
+                  onPressed: () async {
+                    var selectedDate = await showDatePicker(
                         confirmText: "Choose Time",
                         context: context,
                         firstDate: DateTime(2024),
                         lastDate: DateTime.now());
-                    TimePickerDialog(
-                      initialTime: TimeOfDay.now(),
-                      confirmText: "Save",
-                    );
+                    if (selectedDate != null) {
+                      datecontroller.text =
+                          DateFormat("dd MMMM y").format(selectedDate);
+                    }
+
+                    // TimePickerDialog(
+                    //   initialTime: TimeOfDay.now(),
+                    //   confirmText: "Save",
+                    // );
                   },
                   icon: Icon(
                     Icons.timer_outlined,
@@ -235,11 +258,11 @@ class add_button_section extends StatelessWidget {
                 width: 30,
               ),
               //send button
-              IconButton(
+              TextButton(
                   onPressed: () {},
-                  icon: Icon(
-                    Icons.send,
-                    color: ColorConstants.mainBlue,
+                  child: Text(
+                    "Save",
+                    style: TextStyle(color: ColorConstants.mainBlue),
                   ))
             ],
             actionsAlignment: MainAxisAlignment.start,

@@ -95,7 +95,10 @@ class CalendarScreen extends StatelessWidget {
                   //task card
                   ListView.separated(
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => TaskCard(),
+                      itemBuilder: (context, index) => TaskCard(
+                            date: "",
+                            tasktitle: "",
+                          ),
                       separatorBuilder: (context, index) => SizedBox(
                             height: 15,
                           ),
