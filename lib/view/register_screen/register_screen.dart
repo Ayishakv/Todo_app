@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:todo_app/utils/color_constants.dart';
+import 'package:todo_app/view/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -91,11 +92,13 @@ class RegisterScreen extends StatelessWidget {
                       WidgetStatePropertyAll(ColorConstants.mainBlue),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegisterScreen(),
-                      ));
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavBarScreen(),
+                    ),
+                    (route) => false,
+                  );
                 },
                 child: Text(
                   "REGISTER",

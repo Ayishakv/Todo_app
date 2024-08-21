@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-import 'package:todo_app/view/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_app/view/splash_screen/splash_screen.dart';
 
-void main() async {
-  // runApp(MyApp());
-  // await Hive.initFlutter();
-  // var box = await Hive.openBox("taskbox");
+Future<void> main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox("taskBox");
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomNavBarScreen(),
+      home: SplashScreen(),
     );
   }
 }

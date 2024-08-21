@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app/utils/color_constants.dart';
 import 'package:todo_app/utils/image_constants.dart';
 import 'package:todo_app/view/global_widgets/task_card.dart';
@@ -13,14 +12,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchcontroller = TextEditingController();
-  // var taskbox = Hive.box("taskbox");
-  // List taskKeys = [];
-  // @override
-  // void initState() {
-  //   taskKeys = taskbox.keys.toList();
-  //   setState(() {});
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,13 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    // var currenttask = taskbox.get(taskKeys[index]);
-                    return TaskCard(
-                        tasktitle: "",
-                        // currenttask["title"],
-                        date: ""
-                        //  currenttask["date"],
-                        );
+                    return TaskCard(tasktitle: "", date: "");
                   },
                   separatorBuilder: (context, index) => SizedBox(
                         height: 15,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/utils/color_constants.dart';
 import 'package:todo_app/view/add_button_screen/add_button_screen.dart';
@@ -28,14 +28,13 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     FocusScreen(),
     ProfileScreen()
   ];
-  // var taskbox = Hive.box("taskbox");
-  // List taskKeys = [];
-  // @override
-  // void initState() {
-  //   taskKeys = taskbox.keys.toList();
-  //   setState(() {});
-  //   super.initState();
-  // }
+  var taskbox = Hive.box("taskBox");
+  List taskkeys = [];
+  @override
+  void initState() {
+    taskkeys = taskbox.keys.toList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
